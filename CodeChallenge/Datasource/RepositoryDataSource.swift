@@ -38,7 +38,7 @@ class RepositoryDataSource: NSObject, UITableViewDataSource {
         let viewModel = RepositoryViewModel(repo: repo)
         
         cell.configure(with: viewModel)
-        cell.accessoryType = .disclosureIndicator
+       
         
         return cell
     }

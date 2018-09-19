@@ -14,10 +14,10 @@ class RepositoryController: UITableViewController {
         static let AlbumCellHeight: CGFloat = 80
     }
     
+    var stub : Stub?
     var repos : Repository?
-    lazy var dataSource: RepositoryDataSource = {
-        return RepositoryDataSource(repos: [repos!])
-    }()
+    var dataSource = RepositoryDataSource(repos: [Stub.repository])
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
