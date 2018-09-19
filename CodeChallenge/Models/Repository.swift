@@ -25,3 +25,23 @@ class Repository {
     }
     
 }
+
+extension Repository {
+    convenience init?(json: [String: AnyObject]) {
+    struct key {
+        static let repoName = "name"
+        static let description = "description"
+        static let stars = "stargazers_count"
+        static let userName = "login"
+    }
+    
+        guard let repoNameValue = json[key.repoName] as? String,
+            let descriptionValue = json[key.description] as? String,
+            let starValue = json[key.stars] as? Int,
+            let userNameValue = json[key.userName] as? String else {
+                return nil
+    }
+        self.init(repoName: repoNameValue, description: descriptionValue, stars: starValue, userName: userNameValue, avatar: #imageLiteral(resourceName: "AnaSalama.png"))
+    
+    }
+}

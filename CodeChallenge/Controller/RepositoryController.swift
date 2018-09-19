@@ -16,12 +16,17 @@ class RepositoryController: UITableViewController {
     
     var stub : Stub?
     var repos : Repository?
-    var dataSource = RepositoryDataSource(repos: [Stub.repository])
+    //var dataSource = RepositoryDataSource(repos: self.repos)
+
+    lazy var dataSource: RepositoryDataSource = {
+        return RepositoryDataSource(repos: [])
+    }()
+    let client = GithubApiClient()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+       
         
         tableView.dataSource = dataSource
      
@@ -44,5 +49,6 @@ class RepositoryController: UITableViewController {
         return 1
     }
 
+    
 
 }
