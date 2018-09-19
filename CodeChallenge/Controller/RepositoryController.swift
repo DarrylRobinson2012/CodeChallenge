@@ -27,7 +27,9 @@ class RepositoryController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        
+      
+                
+         
         tableView.dataSource = dataSource
      
     }
@@ -49,6 +51,10 @@ class RepositoryController: UITableViewController {
         return 1
     }
 
+    func displayRepository(using viewModel: RepositoryViewModel) {
+        print(viewModel.repoName)
+        
+    }
     
 
 }

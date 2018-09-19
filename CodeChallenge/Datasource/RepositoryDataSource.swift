@@ -13,8 +13,9 @@ import UIKit
 
 class RepositoryDataSource: NSObject, UITableViewDataSource {
 
-    private var repos : [Repository]
     
+    private var repos : [Repository]
+    let client = GithubApiClient()
     init(repos: [Repository]) {
         self.repos = repos
         super.init()
@@ -27,7 +28,9 @@ class RepositoryDataSource: NSObject, UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return repos.count
+       
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,6 +46,11 @@ class RepositoryDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
+
     
     
-}
+    
+    }
+    
+    
+

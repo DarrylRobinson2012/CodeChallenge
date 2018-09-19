@@ -13,9 +13,8 @@ class GithubApiClient {
    
    
     let downloader = JSONDownloader()
-    typealias  RepositoryCompletionHandler = (Repository?, GithubError?) -> Void
-    
-    func getRepos(completion: @escaping RepositoryCompletionHandler) {
+        
+    func getRepos(completion: @escaping (TrendingRepo?, GithubError?)-> Void)  {
     
         guard let url = URL(string: "https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc") else {
             completion(nil, .invalidData)
@@ -23,12 +22,13 @@ class GithubApiClient {
         }
         let request = URLRequest(url: url)
         
-        let task = downloader.jsonTask(with: request) { json, error in DispatchQueue.main.async {
+        let task = downloader.jsonTask(with: request) { json, error in
+            DispatchQueue.main.async {
             guard let json = json else {
                 completion(nil, error)
                 return
             }
-            guard let repository = Repository(json: json) else {
+            guard let repository = TrendingRepo(json: json) else {
                 completion(nil, .jsonParsingFailure(message:"JSON does not contain repos"))
                 return
             }
