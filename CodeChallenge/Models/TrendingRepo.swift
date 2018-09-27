@@ -14,11 +14,12 @@ struct TrendingRepo {
 
 extension TrendingRepo {
     init?(json: [String: AnyObject]) {
-        guard let repositoryJSON = json["items"]  as? [String:AnyObject], let repository = Repository(json: repositoryJSON)
+        guard let repositoryJSON = json["items"] as? [String:AnyObject], let repository = Repository(json: repositoryJSON)
             else {
                 return nil
         }
         self.items = repository
+    
     }
     
 }

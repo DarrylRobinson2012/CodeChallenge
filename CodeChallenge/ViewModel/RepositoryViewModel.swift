@@ -19,7 +19,7 @@ extension RepositoryViewModel {
     init(repo: Repository){
         self.repoName = repo.repoName
         self.repoDescription = repo.description
-        self.userName = repo.userName
+        self.userName = repo.userName.name
         self.starCount = repo.stars
     }
 }

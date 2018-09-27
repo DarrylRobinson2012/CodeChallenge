@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 class JSONDownloader {
     let session: URLSession
     
@@ -22,16 +24,22 @@ class JSONDownloader {
     func jsonTask(with request: URLRequest, completionHandler completion: @escaping JSONTaskCompletionHandler) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { data, response, error in
             
+            
+            
             // Converts to HTTP Response
             guard let httpResponse = response as? HTTPURLResponse else {
+        
                 completion(nil, .requestFailed)
                 return
             }
-            if httpResponse.statusCode == 200 {
+        
+            if httpResponse.statusCode == 200{
+                
                 if let data = data {
                     do {
                         let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
                         completion(json, nil)
+                        
                     } catch {
                         completion(nil, .jsonConversionFailure)
                     }

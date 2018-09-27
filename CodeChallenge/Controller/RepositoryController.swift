@@ -14,8 +14,7 @@ class RepositoryController: UITableViewController {
         static let AlbumCellHeight: CGFloat = 80
     }
     
-    var stub : Stub?
-    var repos : Repository?
+        var repos : Repository?
     //var dataSource = RepositoryDataSource(repos: self.repos)
 
     lazy var dataSource: RepositoryDataSource = {
@@ -28,7 +27,7 @@ class RepositoryController: UITableViewController {
         super.viewDidLoad()
        
       
-                
+     fetchRepos()
          
         tableView.dataSource = dataSource
      
@@ -56,5 +55,16 @@ class RepositoryController: UITableViewController {
         
     }
     
+    func fetchRepos() {
+        client.gettrendingRepo() { repository, error in
+            
+            // handle repository logic here
+            print("fetchRepos client repository: \(repository)")
+        }
+    }
+    
+    
 
 }
+
+

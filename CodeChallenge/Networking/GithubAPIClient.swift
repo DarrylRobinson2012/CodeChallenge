@@ -7,38 +7,55 @@
 //
 
 import Foundation
+import UIKit
 
 class GithubApiClient {
     
    
    
     let downloader = JSONDownloader()
-        
-    func getRepos(completion: @escaping (TrendingRepo?, GithubError?)-> Void)  {
     
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc") else {
-            completion(nil, .invalidData)
-            return
-        }
+    typealias repoCompletionHandler = (Repository?,GithubError?) -> Void
+    typealias trendingRepoHandler = (TrendingRepo?, GithubError?) -> Void
+        
+    private func getRepos(completion: @escaping trendingRepoHandler)  {
+    
+      let url = URL(string: "https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc")!
+        
+        
         let request = URLRequest(url: url)
+      
         
         let task = downloader.jsonTask(with: request) { json, error in
-            DispatchQueue.main.async {
             guard let json = json else {
                 completion(nil, error)
+                
                 return
             }
-            guard let repository = TrendingRepo(json: json) else {
+            
+           print(json)
+          guard  let repository = TrendingRepo(json: json) else {
                 completion(nil, .jsonParsingFailure(message:"JSON does not contain repos"))
                 return
             }
             completion(repository, nil)
+            print(repository)
+                
             }
+        task.resume()
     }
         
-    task.resume()
-        
+  
+    
+    
+    func gettrendingRepo(completion: @escaping repoCompletionHandler) {
+        getRepos {
+    repository, error in
+    completion(repository?.items, error)
+            
     }
+        
+ }
     
 }
     
