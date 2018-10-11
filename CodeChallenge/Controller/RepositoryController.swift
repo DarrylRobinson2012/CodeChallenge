@@ -20,15 +20,16 @@ class RepositoryController: UITableViewController {
     lazy var dataSource: RepositoryDataSource = {
         return RepositoryDataSource(repos: [])
     }()
-    let client = GithubApiClient()
+   
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
       
-     fetchRepos()
-         
+        RepoManager.fetchTrendingRepos { trending in
+            print(trending)
+        }
         tableView.dataSource = dataSource
      
     }
@@ -51,11 +52,13 @@ class RepositoryController: UITableViewController {
     }
 
     func displayRepository(using viewModel: RepositoryViewModel) {
-        print(viewModel.repoName)
+     
+        
+        
         
     }
     
-    func fetchRepos() {
+   /* func fetchRepos() {
         client.gettrendingRepo() { repository, error in
             
             // handle repository logic here
@@ -63,7 +66,7 @@ class RepositoryController: UITableViewController {
         }
     }
     
-    
+    */
 
 }
 

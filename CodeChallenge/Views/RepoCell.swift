@@ -33,7 +33,7 @@ class RepoCell: UITableViewCell {
     func configure(with viewModel: RepositoryViewModel) {
         repositoryNameLabel.text = viewModel.repoName
         repositoryDescriptionLabel.text = viewModel.repoDescription
-        userNameLabel.text = viewModel.userName
+       // userNameLabel.text = viewModel.userName
         starLabel.text = String(viewModel.starCount)
     }
 

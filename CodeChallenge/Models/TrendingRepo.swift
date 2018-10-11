@@ -7,19 +7,8 @@
 //
 
 import Foundation
-struct TrendingRepo {
-    let items: Repository
-    
+
+struct TrendingRepository: Codable {
+    var items = [Repository]()
 }
 
-extension TrendingRepo {
-    init?(json: [String: AnyObject]) {
-        guard let repositoryJSON = json["items"] as? [String:AnyObject], let repository = Repository(json: repositoryJSON)
-            else {
-                return nil
-        }
-        self.items = repository
-    
-    }
-    
-}

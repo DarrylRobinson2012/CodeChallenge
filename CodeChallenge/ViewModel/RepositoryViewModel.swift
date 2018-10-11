@@ -11,15 +11,16 @@ import Foundation
 struct RepositoryViewModel {
     let repoName:  String
     let repoDescription: String
-    let userName: String
+   // let userName: String
     let starCount: Int
 }
 
 extension RepositoryViewModel {
     init(repo: Repository){
-        self.repoName = repo.repoName
-        self.repoDescription = repo.description
-        self.userName = repo.userName.name
-        self.starCount = repo.stars
+        self.repoName = repo.name!
+        self.repoDescription = repo.description!
+        self.starCount = repo.stars!
     }
 }
+
+
