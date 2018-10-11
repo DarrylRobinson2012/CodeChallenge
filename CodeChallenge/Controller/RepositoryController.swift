@@ -14,7 +14,14 @@ class RepositoryController: UITableViewController {
         static let AlbumCellHeight: CGFloat = 80
     }
     
-        var repos : Repository?
+    
+    var repos : TrendingRepository? {
+        didSet {
+            //self.title = repos?.name
+            dataSource.update(with: repos!.items)
+            tableView.reloadData()
+        }
+    }
     //var dataSource = RepositoryDataSource(repos: self.repos)
 
     lazy var dataSource: RepositoryDataSource = {
@@ -30,6 +37,7 @@ class RepositoryController: UITableViewController {
         RepoManager.fetchTrendingRepos { trending in
             print(trending)
         }
+        
         tableView.dataSource = dataSource
      
     }
@@ -41,15 +49,6 @@ class RepositoryController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
-    }
 
     func displayRepository(using viewModel: RepositoryViewModel) {
      

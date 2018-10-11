@@ -47,6 +47,10 @@ class RepositoryDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
+    func update(with repos: [Repository]) {
+        self.repos = repos
+    }
+    
 
     
     
